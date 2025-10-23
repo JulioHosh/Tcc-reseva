@@ -1,0 +1,493 @@
+/* Todo o header e o menu na parte de cima, não sei se vamo deixar assim
+talvez mude porque pode ser que fique bugado nos outro navegador*/
+header{
+    background-color: 	#162b64;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    padding: 1rem 2rem;
+    cursor: default;
+}
+
+
+/* Meio obvio que eh a logo neh vey */
+.logo img{
+    object-fit: contain;
+    height: 150px;
+    margin-top: 10%;
+    margin-right: 80px;
+    margin-left: 10px;
+    display: block;
+}
+
+
+/*Aqui eh as 3 barra do lado da logo que vai abrir mais opçoes, um menuzinho que ta
+no mokup no canva, vou ver se deixo pra falar a vdd, talvez n seja tao util*/
+.opcoes{
+    color: white;
+    cursor: pointer;
+    font-size: 40px;
+    margin-right: 1%;
+}
+
+
+
+/* Aqui é para personalizar as opçoes basica que estao no nav
+Destraques, categorias e comunidade */
+nav a{
+    color: white;
+    font-size: 25px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 0;
+    cursor: pointer;
+    text-decoration: none;
+    position: relative;
+}
+
+nav a::after {
+    content: "";
+    position: absolute;
+    bottom: 53px;
+    left: 0;
+    width: 0%;
+    height: 5px; 
+  }
+  
+  nav a:hover::after {
+    width: 100%;
+  }
+
+nav {
+    display: flex;
+    align-items: center;
+    gap: 60px; /* Isso substitui as margens fixas e 'vh' */
+    flex-grow: 1;
+}
+
+
+  /* Mudar as cores */
+  .l:hover::after {
+    background-color: rgb(255, 60, 0);
+  }
+  .l:hover i {
+    color: rgb(255, 60, 0);
+  }
+
+  
+  .a:hover::after {
+    background-color: #0062ff;
+  }
+  .a:hover i{
+    color:  #0062ff;
+  }
+  
+
+  .v:hover::after {
+    background-color: rgb(255, 0, 76);
+  }
+  .v:hover i{
+    color: rgb(255, 0, 76);
+  }
+
+
+
+/* aqui a barra de pesquisa */
+.pesquisa{
+    width: 250px;
+    height: 40px;
+    border-radius: 15px;
+    padding: 1%;
+    border-style: none;
+    }
+
+    /* Esta regra vai empurrar a busca e tudo que vem depois
+   (o ícone de usuário) para a extrema direita. */
+.nav-search {
+    margin-left: auto; 
+}
+
+.carrinho-icon i{
+  font-size: 35px;
+  color: white;
+  vertical-align: middle;
+}
+
+
+/* Aqui vai ficar a main do site, cor de fundo, textos enfim, vou ver se faço
+separado a parte de add jogos*/
+
+/* A cor do fundo e o margin pra arrumar, pq o navegador adiciona uma margin auto
+que "buga" o header, n fica do jeito que quero */
+html, body{  /* O html, body, basicamente muda o body, mas precisei do html pra arrumar o footer */
+    background: #0e153f;
+     height: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+
+/* As fontes que vamo usar editada, no caso h1, p, etc */
+h1{
+    color: white;
+    font-size: 35px;
+    font-family: Arial, Helvetica, sans-serif;
+    margin-left: 40px;
+    cursor: default;
+}
+
+
+/* Icone de usuario */
+.user i{
+  font-size: 35px;
+  color: white;
+  position: relative;
+}
+
+
+/* O quadrado do fundo na tela de cadastro, onde fica os botoes */
+.cads{
+  
+    background-color: #142481f1;
+    margin-right: auto;
+    margin-left: auto;
+    margin-top: 100px;
+    width: 60%;
+    height: 360px;
+    border-radius: 25px;
+}
+
+
+/* Pagina de cadastro */
+.cad label{    
+    color: white;
+    margin-left: 25px;
+    font-size: 50px;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+ .cad input{   /* Coloquei tudo em uma div .cad pq tava bugando a tela inicial */
+    margin-left: 25px;
+    margin-bottom: 16px;
+    border-radius: 50px;
+    width: 300px;
+    height: 25px;
+    border: 0;
+}
+
+
+
+/* Botao de cadastro, pra mudar de cor quando mouse passar por cima */
+.button input[type="submit"] {
+   width: 150px;
+    height: 50px;
+  background-color: #1e3a8a;  
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 30px;
+  font-family: Arial, Helvetica, sans-serif;
+ transition: background-color 0.4s ease; /*transition nao funciona com cor degrade */
+}
+
+.button input[type="submit"]:hover {
+  background: #0db71e; /* Cor que tava aqui era degrade, n funciona pro transition */
+  color: black;
+}
+
+
+
+/* Arrumar o footer ja, o rodapé*/
+footer{
+  background-color: #070707;
+  color: white;
+  text-align: start;
+  padding: 20px;
+  margin-top: 10px;
+}
+
+
+/* Pra ajeitar o conteudo pra ocupar o maximo de espaço possivel
+pro footer ficar la em baixo, combina junto com o hmtl, body que ta la encima
+mas talvez bugue com o site e nos tenha que fazer de outro jt, NAO TESTEI */
+
+
+
+/* Um body separado pra tela de cadastro, fica mais bonitin */
+body.cadastro{
+  background-image: url('images/gamesbackgroud.jpg');
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+
+
+/* Para fazer o conteudo ocupar o maximo de
+espaço possivel e manter o footer em baixo */
+.content{
+  flex: 1;
+}
+
+
+
+/* Fundo do jogo jogo principal que fica grandão na parte de cima no carrosel */
+.fundo{
+  background-color: #142481f1;
+  margin-left: 40px;
+  width: 56%;
+  height: 530px;
+  border-radius: 25px;
+  display: inline-flex;
+}
+
+
+/* Fundo do jogo base absolute (fica em cima */
+.games{
+  background-color: #142481f1;
+  margin-left: 40px;
+  width: 30%;
+  height: 252px;
+  border-radius: 25px;
+  display: inline-flex;
+  position: absolute
+}
+
+
+
+/* Fundo jogo base normal (possivelmente usar esse
+para colocar os jogos, pra não criar um monte de
+div */
+.games1{
+  background-color: #142481f1;
+  margin-left: 40px;
+  width: 30%;
+  height: 252px;
+  border-radius: 25px;
+  display: inline-flex;
+  position: flex;
+}
+ 
+
+
+/* Para alinhar tudo eu tive que fazer 2 div para os jogos normal. Porque o games1 coloca na parte de cima
+e o 2 na parte de baixo e em todo o resto, porque ele fica "certo", não tem o absolute ent eh gg */
+.games2{
+  background-color: #142481f1;
+  margin-left: 40px;
+  width: 20%;
+  height: 380px;
+  border-radius: 25px;
+  display: inline-flex;
+  position: flex;
+}
+
+
+
+/* Parte final onde mostra os jogos em "lista" */
+.g{
+  background-color: #142481f1;
+  margin-left: 40px;
+  margin-top: 25px;
+  width: 43%;
+  height: 250px;
+  border-radius: 25px;
+  display: inline-flex;
+  position: flex;
+}
+
+body {
+    background-color: #0c0c2a; /* Cor de fundo bem escura, como no print */
+    color: #FFFFFF; /* Cor do texto principal */
+    margin: 0;
+    padding: 0;
+}
+
+/* Container principal do carrinho */
+.carrinho-container {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 25px;
+    background-color: #1a1a4a; /* Um azul escuro para o container principal */
+    border-radius: 15px; /* Cantos arredondados */
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.carrinho-container h1 {
+    font-size: 28px;
+    border-bottom: 2px solid #202050; /* Linha de separação */
+    padding-bottom: 15px;
+    margin-bottom: 25px;
+}
+
+/* Estilo de cada item no carrinho */
+.carrinho-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Para telas menores */
+    
+    background-color: #202050; 
+    border-radius: 10px; /* Cantos arredondados */
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+.carrinho-item img {
+    width: 80px;
+    height: 100px;
+    object-fit: cover;
+    border-radius: 5px;
+    margin-right: 15px;
+}
+
+.item-info {
+    flex-grow: 1; /* Ocupa o espaço disponível */
+    min-width: 200px;
+}
+
+.item-info h3 {
+    margin: 0 0 5px 0;
+    font-size: 18px;
+}
+
+.item-info p {
+    margin: 0;
+    font-size: 14px;
+    color: #b0b0d0; /* Um tom de cinza/azul claro */
+}
+
+.item-preco {
+    font-size: 16px;
+    font-weight: bold;
+    min-width: 100px;
+    text-align: right;
+}
+
+.item-quantidade {
+    margin: 0 15px;
+}
+
+.item-quantidade input {
+    width: 50px;
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid #3a3a7a;
+    background-color: #1a1a4a;
+    color: #FFFFFF;
+    text-align: center;
+    font-size: 16px;
+}
+
+/* Botão de remover */
+.remover-item {
+    background-color: #E63946; /* Um vermelho para destaque */
+    color: #FFFFFF;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.remover-item:hover {
+    background-color: #D62839;
+}
+
+/* Resumo do pedido */
+.carrinho-resumo {
+    background-color: #202050; /* Mesmo azul dos itens */
+    border-radius: 10px;
+    padding: 25px;
+    margin-top: 30px;
+}
+
+.carrinho-resumo h2 {
+    margin-top: 0;
+    border-bottom: 1px solid #3a3a7a;
+    padding-bottom: 10px;
+}
+
+.resumo-linha {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin-bottom: 15px;
+}
+
+.resumo-linha.total {
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 15px;
+}
+
+/* Botão de finalizar compra */
+.finalizar-compra {
+    background-color: #4CAF50; /* Um verde para a ação principal */
+    color: #FFFFFF;
+    border: none;
+    padding: 15px 20px;
+    width: 100%;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+.finalizar-compra:hover {
+    background-color: #45a049;
+}
+
+/* ============ ESTILO RESPONSIVO (MOBILE) ============ */
+
+/* Vamos usar 768px como o ponto de quebra (tamanho de tablet) */
+@media (max-width: 768px) {
+
+    /* 1. Mostrar o botão hambúrguer '☰' em telas pequenas */
+    .opcoes {
+        display: block;
+        z-index: 101; /* Garante que fique acima de outros itens */
+    }
+
+    /* 2. Esconder a navegação por padrão no mobile */
+    nav {
+        display: none; /* Esconde o menu */
+        position: absolute; /* Faz o menu flutuar sobre o conteúdo */
+        top: 0;
+        left: 0;
+        width: 100vw; /* 100% da largura da tela */
+        height: 100vh; /* 100% da altura da tela */
+        background-color: #162b64; /* Mesma cor do header */
+        
+        /* Organiza os links verticalmente */
+        flex-direction: column;
+        align-items: center; /* Centraliza os itens */
+        justify-content: center; /* Centraliza no meio da tela */
+        
+        gap: 30px; /* Espaçamento entre os links */
+        z-index: 100;
+    }
+
+    /* 3. A classe '.active' que o JavaScript vai adicionar */
+    nav.active {
+        display: flex; /* Mostra o menu quando 'active' é adicionado */
+    }
+    
+    /* 4. Estilizar os links no menu mobile */
+    nav a {
+        font-size: 30px; /* Aumenta a fonte para mobile */
+    }
+
+    /* 5. Ajustar a barra de pesquisa e ícone de usuário */
+    .pesquisa {
+        width: 80%; /* Ajustar largura */
+        max-width: 300px;
+        height: 45px;
+        font-size: 18px;
+    }
+}
