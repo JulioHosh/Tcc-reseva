@@ -1,0 +1,234 @@
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Hades II</title>
+
+    <!-- Fonte do título -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome para ícones (CORREÇÃO!) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+    <!-- Seu CSS -->
+    <link rel="stylesheet" href="../style.css">
+
+    
+</head>
+
+
+<header>
+    <!-- Ícone hamburguer animado -->
+    <div class="menu-icon" onclick="toggleMenu()">
+        <span></span>
+        <span></span>
+        <span></span>
+    </div>
+
+    <div class="logo">
+        <img src="../images/logo.png" alt="logo">
+    </div>
+
+    <nav>
+        <a href="#" class="l"><i class="fa-solid fa-star"></i>Destaques</a>
+        <a href="#" class="a"><i class="fa-solid fa-book"></i>Categorias</a>
+        <a href="../comunidade.html" class="v"><i class="fa-solid fa-globe"></i>Comunidade</a>
+
+        <input type="search" class="pesquisa" placeholder="Buscar...">
+
+        <a href="../cadastro.html" class="user">
+            <i class="fa-solid fa-circle-user"></i>
+        </a>
+
+        <a href="../carrinho.html" class="carrinho-icon">
+            <i class="fa-solid fa-cart-shopping"></i>
+        </a>
+    </nav>
+</header>
+
+<!-- MENU LATERAL -->
+<nav id="sidebar" class="sidebar">
+
+    <div class="sidebar-content">
+
+        <!-- Usuário -->
+        <div class="sidebar-user">
+            <i class="fa-solid fa-circle-user user-icon"></i>
+
+            <div class="user-info">
+                <h3>Meu Usuário</h3>
+                <span class="saldo">R$ 200,00</span>
+            </div>
+        </div>
+
+        <hr>
+
+        <!-- Menu -->
+        <ul class="sidebar-menu">
+            <li><i class="fa-solid fa-bell"></i> Notificações</li>
+
+            <li onclick="window.location.href='../amigos.html'">
+                <i class="fa-solid fa-user-group"></i> Amigos
+            </li>
+
+            <li><i class="fa-solid fa-comments"></i> Chat</li>
+            <li><i class="fa-solid fa-headset"></i> Apoio</li>
+        </ul>
+
+        <!-- Rodapé -->
+        <div class="sidebar-footer">
+            <img src="../images/gato-ludo.png" class="logo-gato">
+            <span class="ludo-text">Ludo</span>
+        </div>
+
+    </div>
+</nav>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<main class="product-page">
+
+    <!-- Lado esquerdo -->
+    <section class="product-left">
+        <img class="product-cover" src="imagem do jogo.jpg">
+
+        <div class="product-gallery">
+            <img src="print1.jpg">
+            <img src="print2.jpg">
+            <img src="print3.jpg">
+        </div>
+    </section>
+
+    <!-- Lado direito -->
+    <section class="product-info">
+
+        <h1 class="product-title">
+            Hades II
+        </h1>
+
+        <p class="product-desc">
+            Transcenda o Submundo com feitiços das trevas para enfrentar o titã do tempo nesta sequência mágica do premiado roguelike de exploração de masmorras.
+        </p>
+
+       <button class="buy-btn" onclick="addToCart('Hades II', 89.99)">
+    Comprar
+</button>
+
+
+       <script>
+function adicionarAoCarrinho() {
+    // Dados do jogo atual
+    const produto = {
+        nome: "hades-ii",
+        preco: 89.99,
+        imagem: "Imagem do jogo.jpg"
+    };
+
+    // Pega o carrinho salvo ou cria um novo
+    let carrinho = JSON.parse(localStorage.getItem("cart")) || [];
+
+    // Adiciona o jogo
+    carrinho.push(produto);
+
+    // Salva novamente
+    localStorage.setItem("cart", JSON.stringify(carrinho));
+
+    // Redireciona
+    window.location.href = "../carrinho.html";
+}
+</script>
+
+
+        <!-- BENCHMARK -->
+        <div class="benchmark">
+            <h2>O seu PC roda?</h2>
+
+            <div class="bench-box">
+                <label>Placa de vídeo (GPU):</label>
+                <select id="gpu">
+                    <option value="200">GTX 1650</option>
+                    <option value="250">GTX 1660 Super</option>
+                    <option value="300">RTX 3050</option>
+                    <option value="350">RTX 3060</option>
+                    <option value="420">RTX 4060</option>
+                </select>
+
+                <label>Processador (CPU):</label>
+                <select id="cpu">
+                    <option value="150">i3 10100F</option>
+                    <option value="200">i5 10400F</option>
+                    <option value="260">i5 12400F</option>
+                    <option value="320">Ryzen 5 5600</option>
+                    <option value="380">Ryzen 5 7600</option>
+                </select>
+
+                <label>Memória RAM:</label>
+                <select id="ram">
+                    <option value="100">8GB</option>
+                    <option value="180">16GB</option>
+                    <option value="220">32GB</option>
+                </select>
+
+                <button onclick="calcularFPS()" class="fps-btn">Calcular FPS</button>
+
+                <div id="resultado"></div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<!-- JS do Benchmark -->
+<script>
+function calcularFPS() {
+    let gpu = parseInt(document.getElementById("gpu").value);
+    let cpu = parseInt(document.getElementById("cpu").value);
+    let ram = parseInt(document.getElementById("ram").value);
+
+    let potencia = gpu + cpu + ram;
+    let fps = Math.round(potencia / 10);
+
+    let qualidade = "";
+
+    if (fps < 40) qualidade = "Baixa";
+    else if (fps < 70) qualidade = "Média";
+    else if (fps < 110) qualidade = "Alta";
+    else qualidade = "Ultra";
+
+    document.getElementById("resultado").innerHTML = `
+        <b>FPS estimado:</b> ${fps} FPS<br>
+        <b>Qualidade recomendada:</b> ${qualidade}
+    `;
+}
+
+
+function toggleMenu() {
+    const menu = document.getElementById("sidebar");
+    const icon = document.querySelector(".menu-icon");
+
+    menu.classList.toggle("open");
+    icon.classList.toggle("active");
+}
+</script>
+
+<script>
+// Função para adicionar produto ao carrinho
+function addToCart(nome, preco) {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+    cart.push({
+        nome: nome,
+        preco: preco,
+        imagem: "Imagem do jogo.jpg" // <-- AQUI ESTÁ A CORREÇÃO
+    });
+
+    localStorage.setItem("cart", JSON.stringify(cart));
+
+    alert("Produto adicionado ao carrinho!");
+    window.location.href = "../carrinho.html"; // Vai para o carrinho
+}
+</script>
+
+
+
+</body>
+</html>

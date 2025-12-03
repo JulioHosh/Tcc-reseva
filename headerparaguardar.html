@@ -1,0 +1,59 @@
+    !
+    <!-- HEADER -->
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="logo">
+            <img src="images/logo.png" alt="logo">
+        </div>
+
+        <nav>
+            <a href="*" class="l"><i class="fa-solid fa-star"></i>Destaques</a>
+            <a href="*" class="a"><i class="fa-solid fa-book"></i>Categorias</a>
+            <a href="comunidade.html" class="v"><i class="fa-solid fa-globe"></i>Comunidade</a>
+
+            <a><input type="search" class="pesquisa" placeholder="Buscar..."></a>
+
+            <a href="cadastro.html" class="user">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
+            <a href="carrinho.html" class="carrinho-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </nav>
+    </header>
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+
+            <div class="sidebar-user">
+                <i class="fa-solid fa-circle-user user-icon"></i>
+                <div class="user-info">
+                    <h3>Meu Usuário</h3>
+                    <span class="saldo">R$ 200,00</span>
+                </div>
+            </div>
+
+            <hr>
+
+            <ul class="sidebar-menu">
+                <li><i class="fa-solid fa-bell"></i> Notificações</li>
+                <li onclick="window.location.href='amigos.html'">
+                    <i class="fa-solid fa-user-group"></i> Amigos
+                </li>
+                <li><i class="fa-solid fa-comments"></i> Chat</li>
+                <li><i class="fa-solid fa-headset"></i> Apoio</li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <img src="images/gato-ludo.png" class="logo-gato">
+                <span class="ludo-text">Ludo</span>
+            </div>
+
+        </div>
+    </nav>

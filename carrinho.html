@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Carrinho - Ludo</title>
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+  <!-- Seu CSS (caminho relativo) -->
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    /* Pequenos ajustes visuais específicos do carrinho */
+    .cart-container { width:90%; max-width:900px; margin:120px auto; background:rgba(20,20,20,0.9); padding:25px; border-radius:15px; }
+    .cart-container h2 { color: white; margin:0 0 15px; }
+    .cart-item { display:flex; align-items:center; gap:15px; background:rgba(255,255,255,0.03); padding:12px; border-radius:10px; margin-bottom:12px; }
+    .cart-item img { width:90px; height:90px; object-fit:cover; border-radius:8px; }
+    .cart-details h3 { margin:0; color:white; font-size:18px; }
+    .cart-details p { margin:6px 0 0; color:#ccc; }
+    .remove-btn { background:#ff3b3b; color:white; border:none; padding:8px 12px; border-radius:8px; cursor:pointer; }
+    .remove-btn:hover { background:#cc2f2f; }
+    .cart-actions { display:flex; gap:12px; align-items:center; justify-content:flex-end; margin-top:12px; }
+    .finish-btn { background:#00b7ff; color:#000; padding:12px 18px; border-radius:8px; border:none; font-weight:700; cursor:pointer; }
+    .finish-btn:disabled { opacity:.5; cursor:not-allowed; }
+    .empty-msg { color:#ccc; }
+  </style>
+</head>
+<body>
+
+    !
+    <!-- HEADER -->
+    <header>
+        <div class="menu-icon" onclick="toggleMenu()">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+
+        <div class="logo">
+            <img src="images/logo.png" alt="logo">
+        </div>
+
+        <nav>
+            <a href="*" class="l"><i class="fa-solid fa-star"></i>Destaques</a>
+            <a href="*" class="a"><i class="fa-solid fa-book"></i>Categorias</a>
+            <a href="../comunidade.html" class="v"><i class="fa-solid fa-globe"></i>Comunidade</a>
+
+            <a><input type="search" class="pesquisa" placeholder="Buscar..."></a>
+
+            <a href="../cadastro.html" class="user">
+                <i class="fa-solid fa-circle-user"></i>
+            </a>
+            <a href="../carrinho.html" class="carrinho-icon">
+                <i class="fa-solid fa-cart-shopping"></i>
+            </a>
+        </nav>
+    </header>
+
+    <!-- SIDEBAR -->
+    <nav id="sidebar" class="sidebar">
+        <div class="sidebar-content">
+
+            <div class="sidebar-user">
+                <i class="fa-solid fa-circle-user user-icon"></i>
+                <div class="user-info">
+                    <h3>Meu Usuário</h3>
+                    <span class="saldo">R$ 200,00</span>
+                </div>
+            </div>
+
+            <hr>
+
+            <ul class="sidebar-menu">
+                <li><i class="fa-solid fa-bell"></i> Notificações</li>
+                <li onclick="window.location.href='amigos.html'">
+                    <i class="fa-solid fa-user-group"></i> Amigos
+                </li>
+                <li><i class="fa-solid fa-comments"></i> Chat</li>
+                <li><i class="fa-solid fa-headset"></i> Apoio</li>
+            </ul>
+
+            <div class="sidebar-footer">
+                <img src="images/gato-ludo.png" class="logo-gato">
+                <span class="ludo-text">Ludo</span>
+            </div>
+
+        </div>
+    </nav>
+
+  <main class="cart-container" id="cart-root">
+    <h2>🛒 Seu Carrinho</h2>
+
+    <div id="cart-items"></div>
+
+    <div class="cart-actions">
+      <div style="color:white; font-weight:700;">Total: R$ <span id="total-value">0.00</span></div>
+      <button id="clear-btn" class="remove-btn">Limpar Carrinho</button>
+      <button id="finish-btn" class="finish-btn">Finalizar Compra</button>
+    </div>
+  </main>
+
+<script>
+/*
+  Estrutura esperada no localStorage: chave "cart"
+  cart = [ { nome: "Enigma do Medo", preco: 49.9, imagem: "caminho.jpg" }, ... ]
+  O código trata itens sem imagem usando fallback.
+*/
+
+const CART_KEY = "cart";
+const fallbackImg = "images/placeholder-200.png"; // ajuste para sua placeholder
+
+function carregarCarrinho() {
+  const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  const container = document.getElementById("cart-items");
+  const totalEl = document.getElementById("total-value");
+  const finishBtn = document.getElementById("finish-btn");
+  const clearBtn = document.getElementById("clear-btn");
+
+  container.innerHTML = "";
+  let total = 0;
+
+  if (cart.length === 0) {
+    container.innerHTML = '<p class="empty-msg">Seu carrinho está vazio.</p>';
+    totalEl.innerText = "0.00";
+    finishBtn.disabled = true;
+    clearBtn.disabled = true;
+    return;
+  }
+
+  cart.forEach((item, idx) => {
+    const img = item.imagem ? item.imagem : fallbackImg;
+    const preco = Number(item.preco) || 0;
+    total += preco;
+
+    const html = document.createElement("div");
+    html.className = "cart-item";
+    html.innerHTML = `
+      <img src="${img}" alt="${escapeHtml(item.nome)}" onerror="this.src='${fallbackImg}'">
+      <div class="cart-details">
+        <h3>${escapeHtml(item.nome)}</h3>
+        <p>Preço: R$ ${preco.toFixed(2)}</p>
+      </div>
+      <div>
+        <button class="remove-btn" data-index="${idx}">Remover</button>
+      </div>
+    `;
+    container.appendChild(html);
+  });
+
+  totalEl.innerText = total.toFixed(2);
+  finishBtn.disabled = false;
+  clearBtn.disabled = false;
+
+  // delegação de evento para remover
+  container.querySelectorAll(".remove-btn").forEach(btn => {
+    btn.addEventListener("click", (e) => {
+      const i = Number(e.currentTarget.dataset.index);
+      removerItem(i);
+    });
+  });
+
+}
+
+// remover por índice
+function removerItem(index) {
+  const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  if (index >= 0 && index < cart.length) {
+    cart.splice(index, 1);
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+    carregarCarrinho();
+  }
+}
+
+// limpar carrinho
+document.getElementById("clear-btn").addEventListener("click", () => {
+  if (!confirm("Tem certeza que deseja limpar o carrinho?")) return;
+  localStorage.removeItem(CART_KEY);
+  carregarCarrinho();
+});
+
+// finalizar compra -> valida e redireciona para pagamento.html
+document.getElementById("finish-btn").addEventListener("click", () => {
+  const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  if (!cart.length) {
+    alert("Seu carrinho está vazio.");
+    return;
+  }
+
+  // opcional: montar um objeto de pedido e salvar em localStorage para uso no checkout
+  const order = {
+    id: "PED-" + Date.now(),
+    itens: cart,
+    total: cart.reduce((s, it) => s + (Number(it.preco) || 0), 0),
+    createdAt: new Date().toISOString()
+  };
+  localStorage.setItem("currentOrder", JSON.stringify(order));
+
+  // redireciona para a página de pagamento (crie pagamento.html)
+  window.location.href = "pagamento.html";
+});
+
+function escapeHtml(text) {
+  if(!text) return "";
+  return text.replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+}
+
+// inicializa
+carregarCarrinho();
+</script>
+
+</body>
+</html>

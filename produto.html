@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="https://kit.fontawesome.com/dcc8a9c324.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina inicial</title>
+</head>
+
+<header>
+    <!-- Ícone hamburguer animado -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+
+  <div class="logo">
+      <img src="images/logo.png" alt="logo">
+  </div>
+
+  <nav>
+      <a href="*" class="l"><i class="fa-solid fa-star"></i>Destaques</a>
+      <a href="*" class="a"><i class="fa-solid fa-book"></i>Categorias</a>
+      <a href="comunidade.html" class="v"><i class="fa-solid fa-globe"></i>Comunidade</a>
+
+      <a><input type="search" class="pesquisa" placeholder="Buscar..."></a>
+
+      <a href="cadastro.html" class="user">
+          <i class="fa-solid fa-circle-user"></i>
+      </a>
+      <a href="carrinho.html" class="carrinho-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+      </a>
+  </nav>
+
+</header>
+<nav id="sidebar" class="sidebar">
+  <!-- Seu conteúdo do menu -->
+
+  <div class="sidebar-content">
+
+    <!-- TOPO - Usuário -->
+    <div class="sidebar-user">
+        <i class="fa-solid fa-circle-user user-icon"></i>
+
+        <div class="user-info">
+            <h3>Meu Usuário</h3>
+            <span class="saldo">R$ 200,00</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- MENU PRINCIPAL -->
+    <ul class="sidebar-menu">
+        <li><i class="fa-solid fa-bell"></i> Notificações</li>
+        <li onclick="window.location.href='amigos.html'">
+          <i class="fa-solid fa-user-group"></i> Amigos
+      </li>
+      
+        <li><i class="fa-solid fa-comments"></i> Chat</li>
+        <li><i class="fa-solid fa-headset"></i> Apoio</li>
+    </ul>
+
+    <!-- RODAPÉ DO MENU - LOGO -->
+    <div class="sidebar-footer">
+        <img src="images/gato-ludo.png" class="logo-gato">
+        <span class="ludo-text">Ludo</span>
+    </div>
+
+</div>
+
+</nav>
+
+<body>
+
+<div class="produto-container">
+
+    <!-- LADO ESQUERDO - GALERIA -->
+    <div class="galeria">
+        <img id="main-img" class="foto-grande" src="">
+        <div class="miniaturas" id="thumbs"></div>
+    </div>
+
+    <!-- LADO DIREITO - INFORMAÇÕES -->
+    <div class="info">
+        <h1 id="titulo"></h1>
+        <p id="descricao"></p>
+
+        <h2>R$ <span id="preco"></span></h2>
+
+        <button class="btn-comprar">Comprar</button>
+
+        <hr>
+
+        <!-- BENCHMARK -->
+        <h3>Benchmark – Verifique se roda no seu PC</h3>
+
+        <label>Placa de Vídeo (GPU):</label>
+        <select id="gpu">
+            <option value="3050">RTX 3050</option>
+            <option value="3060">RTX 3060</option>
+            <option value="4060">RTX 4060</option>
+            <option value="1070">GTX 1070</option>
+            <option value="1650">GTX 1650</option>
+        </select>
+
+        <label>Processador (CPU):</label>
+        <select id="cpu">
+            <option value="i3">Intel i3</option>
+            <option value="i5">Intel i5</option>
+            <option value="i7">Intel i7</option>
+        </select>
+
+        <label>Memória RAM:</label>
+        <select id="ram">
+            <option value="8">8GB</option>
+            <option value="16">16GB</option>
+            <option value="32">32GB</option>
+        </select>
+
+        <button onclick="calcularFPS()" class="btn-fps">Calcular FPS</button>
+
+        <p id="resultado-fps"></p>
+
+    </div>
+</div>
+
+
+<script src="produtos.js"></script>
+<h2>Sistema de Benchmark</h2>
+
+<div class="bench-box">
+
+    <label>Placa de vídeo (GPU):</label>
+    <select id="gpu">
+        <option value="200">GTX 1650</option>
+        <option value="250">GTX 1660 Super</option>
+        <option value="300">RTX 3050</option>
+        <option value="350">RTX 3060</option>
+        <option value="420">RTX 4060</option>
+    </select>
+
+    <label>Processador (CPU):</label>
+    <select id="cpu">
+        <option value="150">i3 10100F</option>
+        <option value="200">i5 10400F</option>
+        <option value="260">i5 12400F</option>
+        <option value="320">Ryzen 5 5600</option>
+        <option value="380">Ryzen 5 7600</option>
+    </select>
+
+    <label>Memória RAM:</label>
+    <select id="ram">
+        <option value="100">8GB</option>
+        <option value="180">16GB</option>
+        <option value="220">32GB</option>
+    </select>
+
+    <button onclick="calcularFPS()">Calcular FPS</button>
+
+    <div id="resultado"></div>
+</div>
+
+<script>
+function calcularFPS() {
+
+    let gpu = parseInt(document.getElementById("gpu").value);
+    let cpu = parseInt(document.getElementById("cpu").value);
+    let ram = parseInt(document.getElementById("ram").value);
+
+    // soma da "potência total"
+    let potencia = gpu + cpu + ram;
+
+    // FPS base fictício
+    let fps = Math.round(potencia / 10);
+
+    let qualidade = "";
+
+    if (fps < 40) qualidade = "Baixa";
+    else if (fps < 70) qualidade = "Média";
+    else if (fps < 110) qualidade = "Alta";
+    else qualidade = "Ultra";
+
+    document.getElementById("resultado").innerHTML = `
+        <b>FPS estimado:</b> ${fps} FPS<br>
+        <b>Qualidade recomendada:</b> ${qualidade}
+    `;
+}
+</script>
+
+
+</body>
+</html>

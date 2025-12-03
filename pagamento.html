@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Pagamento - Ludo</title>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+
+  <style>
+    .pay-container { width:90%; max-width:900px; margin:100px auto; background:rgba(20,20,20,0.95); padding:25px; border-radius:12px; color:white; }
+    .pay-row { display:flex; gap:20px; flex-wrap:wrap; }
+    .order-summary { flex:1 1 320px; background:rgba(255,255,255,0.03); padding:15px; border-radius:8px; }
+    .checkout-form { flex:1 1 320px; background:rgba(255,255,255,0.03); padding:15px; border-radius:8px; }
+    .checkout-form label { display:block; margin-top:10px; color:#ddd; }
+    .checkout-form input { width:100%; padding:10px; border-radius:6px; margin-top:6px; border:1px solid #333; background:#0b0b16; color:white; }
+    .pay-btn { margin-top:12px; padding:12px; width:100%; background:#00d4ff; border:none; border-radius:8px; font-weight:700; cursor:pointer; color:#000; }
+    .success { background: #0b3; color:#002; padding:12px; border-radius:8px; margin-top:12px; display:none; }
+  </style>
+</head>
+<body>
+
+  <!-- Header (cole seu header se quiser) -->
+
+  <main class="pay-container">
+    <h2>Pagamento</h2>
+
+    <div id="order-info" class="order-summary">
+      <h3>Resumo do pedido</h3>
+      <div id="order-items"></div>
+      <div style="margin-top:12px; font-weight:700;">Total: R$ <span id="order-total">0.00</span></div>
+    </div>
+
+    <div class="checkout-form">
+      <h3>Dados de pagamento (simulado)</h3>
+
+      <label>Nome no cartão</label>
+      <input id="card-name" placeholder="Nome completo">
+
+      <label>Número do cartão</label>
+      <input id="card-number" placeholder="0000 0000 0000 0000">
+
+      <label>Validade</label>
+      <input id="card-exp" placeholder="MM/AA">
+
+      <label>CVV</label>
+      <input id="card-cvv" placeholder="123">
+
+      <button id="pay-btn" class="pay-btn">Pagar agora</button>
+
+      <div id="success" class="success">Pagamento realizado com sucesso! Redirecionando...</div>
+    </div>
+
+    <div style="clear:both"></div>
+  </main>
+
+<script>
+const CART_KEY = "cart";
+
+function carregarOrder() {
+  // prefer currentOrder salvo no carrinho; se não houver, compõe a partir do cart
+  let order = JSON.parse(localStorage.getItem("currentOrder"));
+  const cart = JSON.parse(localStorage.getItem(CART_KEY)) || [];
+
+  if (!order) {
+    const total = cart.reduce((s,it) => s + (Number(it.preco)||0), 0);
+    order = { id: "PED-" + Date.now(), itens: cart, total };
+  }
+
+  // exibir
+  const itemsEl = document.getElementById("order-items");
+  itemsEl.innerHTML = "";
+  if (!order.itens || !order.itens.length) {
+    itemsEl.innerHTML = "<p>Nenhum item no pedido.</p>";
+  } else {
+    order.itens.forEach(it => {
+      itemsEl.innerHTML += `<div style="padding:6px 0; border-bottom:1px solid #222;">
+        <div style="font-weight:600">${escapeHtml(it.nome)}</div>
+        <div style="color:#ccc">R$ ${(Number(it.preco)||0).toFixed(2)}</div>
+      </div>`;
+    });
+  }
+
+  document.getElementById("order-total").innerText = (Number(order.total)||0).toFixed(2);
+  // salva para referência
+  localStorage.setItem("currentOrder", JSON.stringify(order));
+}
+
+function escapeHtml(text) {
+  if(!text) return "";
+  return text.replace(/[&<>"']/g, function(m){ return ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'})[m]; });
+}
+
+document.getElementById("pay-btn").addEventListener("click", () => {
+  // simples validação
+  const name = document.getElementById("card-name").value.trim();
+  const number = document.getElementById("card-number").value.trim();
+  const exp = document.getElementById("card-exp").value.trim();
+  const cvv = document.getElementById("card-cvv").value.trim();
+
+  if (!name || !number || !exp || !cvv) {
+    alert("Preencha todos os campos do pagamento (isso é uma simulação).");
+    return;
+  }
+
+  // simula processamento
+  document.getElementById("pay-btn").disabled = true;
+  document.getElementById("pay-btn").innerText = "Processando...";
+
+  setTimeout(() => {
+    // sucesso simulado: limpa cart e mostra mensagem
+    localStorage.removeItem(CART_KEY);
+    // opcional: manter currentOrder para histórico /api...
+    document.getElementById("success").style.display = "block";
+    document.getElementById("pay-btn").innerText = "Pago";
+    // redireciona para página de confirmação ou início
+    setTimeout(() => {
+      window.location.href = "confirmacao.html"; // se não existir, pode apontar para index.html
+    }, 1600);
+  }, 1200);
+});
+
+carregarOrder();
+</script>
+
+</body>
+</html>

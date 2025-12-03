@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirmação de Compra</title>
+    <link rel="stylesheet" href="style.css"> <!-- seu css -->
+</head>
+<body>
+
+<header class="header">
+    <h1>🛒 Compra Finalizada</h1>
+</header>
+
+<main class="confirmacao-container">
+    <div class="confirmacao-card">
+        <h2>Obrigado pela sua compra!</h2>
+        <p>Seu pedido foi registrado com sucesso.</p>
+
+        <div class="confirmacao-info">
+            <p><strong>Número do pedido:</strong> #<span id="numeroPedido"></span></p>
+            <p><strong>Status:</strong> Aguardando pagamento</p>
+        </div>
+
+        <button class="btn-voltar" onclick="window.location.href='index.html'">
+            Voltar para a loja
+        </button>
+    </div>
+</main>
+
+<script>
+    // Gera número de pedido simples
+    document.getElementById("numeroPedido").innerText =
+        Math.floor(Math.random() * 90000) + 10000;
+</script>
+
+</body>
+</html>

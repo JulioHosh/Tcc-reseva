@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="https://kit.fontawesome.com/dcc8a9c324.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunidade</title>
+</head>
+
+<header>
+    <!-- Ícone hamburguer animado -->
+    <div class="menu-icon" onclick="toggleMenu()">
+      <span></span>
+      <span></span>
+      <span></span>
+  </div>
+
+  <div class="logo">
+      <img src="images/logo.png" alt="logo">
+  </div>
+
+  <nav>
+      <a href="*" class="l"><i class="fa-solid fa-star"></i>Destaques</a>
+      <a href="*" class="a"><i class="fa-solid fa-book"></i>Categorias</a>
+      <a href="comunidade.html" class="v"><i class="fa-solid fa-globe"></i>Comunidade</a>
+
+      <a><input type="search" class="pesquisa" placeholder="Buscar..."></a>
+
+      <a href="cadastro.html" class="user">
+          <i class="fa-solid fa-circle-user"></i>
+      </a>
+      <a href="carrinho.html" class="carrinho-icon">
+          <i class="fa-solid fa-cart-shopping"></i>
+      </a>
+  </nav>
+
+</header>
+<nav id="sidebar" class="sidebar">
+  <!-- Seu conteúdo do menu -->
+
+  <div class="sidebar-content">
+
+    <!-- TOPO - Usuário -->
+    <div class="sidebar-user">
+        <i class="fa-solid fa-circle-user user-icon"></i>
+
+        <div class="user-info">
+            <h3>Meu Usuário</h3>
+            <span class="saldo">R$ 200,00</span>
+        </div>
+    </div>
+
+    <hr>
+
+    <!-- MENU PRINCIPAL -->
+    <ul class="sidebar-menu">
+        <li><i class="fa-solid fa-bell"></i> Notificações</li>
+        <li onclick="window.location.href='amigos.html'">
+          <i class="fa-solid fa-user-group"></i> Amigos
+      </li>
+      
+        <li><i class="fa-solid fa-comments"></i> Chat</li>
+        <li><i class="fa-solid fa-headset"></i> Apoio</li>
+    </ul>
+
+    <!-- RODAPÉ DO MENU - LOGO -->
+    <div class="sidebar-footer">
+        <img src="images/gato-ludo.png" class="logo-gato">
+        <span class="ludo-text">Ludo</span>
+    </div>
+
+</div>
+
+</nav>
+
+
+<section class="comunidades-container">
+
+    <!-- ---------------- ENIGMA DO MEDO ---------------- -->
+    <div class="comunidade-card">
+        <img src="https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEjhmh4miSysrXEPDFvkJlvXKFmkWfUdVbRWPH4fOvZYJ-xuIMxQ8ARazIFtBi9gJfF8dlSUxA7ogS2CH0bzl3nX5hTruHbj0R3BWlgzsAjcHlrY29lyzfreWBEJYVN3im_zdrkPTNGkMHHROUOiYzZc3cf9zt4-ZFwhhHLb0aHuctBXgvCCeqqxaDq4PF4/s616/capsule_616x353_brazilian.jpg"
+            class="banner">
+
+        <h2>Enigma do Medo</h2>
+        <p>Uma comunidade para os investigadores compartilharem teorias, gameplays e segredos do jogo.</p>
+
+        <button class="entrar-btn">Entrar</button>
+    </div>
+
+    <!-- ---------------- RED DEAD REDEMPTION 2 ---------------- -->
+    <div class="comunidade-card">
+        <img src="https://tse2.mm.bing.net/th/id/OIP.PAMAYcXmDJERYIxPowXyYAHaEq?cb=12ucfimg=1&rs=1&pid=ImgDetMain&o=7&rm=3"
+            class="banner">
+
+        <h2>Red Dead Redemption 2</h2>
+        <p>Comunidade de fãs do Velho Oeste, explorando teorias, gameplays e desafios entre cowboys.</p>
+
+        <button class="entrar-btn">Entrar</button>
+    </div>
+
+    <!-- ---------------- COPIAR ESSE MODELO PARA NOVAS COMUNIDADES ---------------- -->
+    <!--
+    <div class="comunidade-card">
+        <img src="URL_DA_IMAGEM" class="banner">
+        <h2>Nome do Jogo</h2>
+        <p>Descrição da comunidade.</p>
+        <button class="entrar-btn">Entrar</button>
+    </div>
+    -->
+
+</section>
+
+<script>
+    function toggleMenu() {
+        const menu = document.getElementById("sidebar");
+        const icon = document.querySelector(".menu-icon");
+    
+        menu.classList.toggle("open");
+        icon.classList.toggle("active");
+    }
+    </script>
